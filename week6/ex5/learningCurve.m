@@ -16,6 +16,7 @@ function [error_train, error_val] = ...
 
 % Number of training examples
 m = size(X, 1);
+m_val = size(Xval, 1);
 
 % You need to return these values correctly
 error_train = zeros(m, 1);
@@ -53,9 +54,13 @@ error_val   = zeros(m, 1);
 
 % ---------------------- Sample Solution ----------------------
 
-
-
-
+for i = 1:m
+    X_temp = [ones(i, 1), X(1:i, :)]; y_temp = y(1:i);
+    [theta] = trainLinearReg(X_temp, y_temp, lambda);
+    
+    error_train(i) = (1 / (2 * i)) * ((X_temp * theta - y_temp)' * (X_temp * theta - y_temp));
+    error_val(i) = (1 / (2 * m_val)) * (([ones(m_val, 1), Xval] * theta - yval)' * ([ones(m_val, 1), Xval] * theta - yval));
+end
 
 
 
