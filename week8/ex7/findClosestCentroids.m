@@ -21,9 +21,12 @@ idx = zeros(size(X,1), 1);
 % Note: You can use a for-loop over the examples to compute this.
 %
 
-
-
-
+for i = 1:size(X, 1)
+    temp = (centroids - X(i, :)) .^ 2;
+    distance = temp(:, 1) + temp(:, 2);
+    
+    %Get index and min value (~ indicates do not save the value)
+    [~, idx(i)] = min(distance);
 
 
 
